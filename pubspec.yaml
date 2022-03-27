@@ -1,5 +1,5 @@
-name: social_app_ui
-description: A Social app UI made with flutter.
+name: snapam
+description: A Simple social app made with Flutter.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -23,6 +23,8 @@ dependencies:
   google_fonts: ^1.0.0
   flutter_staggered_animations: ^0.1.2
   lottie: ^0.6.0
+  responsive_builder: ^0.2.0+2
+  flutter_icons: ^1.1.0
 
 dev_dependencies:
   flutter_test:

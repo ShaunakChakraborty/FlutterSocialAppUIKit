@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:social_app_ui/views/widgets/post_item.dart';
-import 'package:social_app_ui/util/data.dart';
+import 'package:snapam/views/components/post_item.dart';
+import 'package:snapam/util/data.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -10,21 +10,14 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Feeds"),
+        title: Text("Home"),
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.filter_list,
-            ),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: ListView.builder(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.2),
         itemCount: posts.length,
         itemBuilder: (BuildContext context, int index) {
           Map post = posts[index];

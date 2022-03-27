@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:social_app_ui/views/screens/chat/conversation.dart';
+import 'package:snapam/views/pages/chat/conversation.dart';
 
 
 class ChatItem extends StatefulWidget {
@@ -31,7 +31,7 @@ class _ChatItemState extends State<ChatItem> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: ListTile(
-        contentPadding: EdgeInsets.all(0),
+        contentPadding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
         leading: Stack(
           children: <Widget>[
             CircleAvatar(

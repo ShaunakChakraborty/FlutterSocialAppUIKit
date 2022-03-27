@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:social_app_ui/util/animations.dart';
-import 'package:social_app_ui/util/const.dart';
-import 'package:social_app_ui/util/enum.dart';
-import 'package:social_app_ui/util/router.dart';
-import 'package:social_app_ui/util/validations.dart';
-import 'package:social_app_ui/views/screens/main_screen.dart';
-import 'package:social_app_ui/views/widgets/custom_button.dart';
-import 'package:social_app_ui/views/widgets/custom_text_field.dart';
-import 'package:social_app_ui/util/extensions.dart';
+import 'package:snapam/util/constants/animations.dart';
+import 'package:snapam/util/constants/strings.dart';
+import 'package:snapam/util/enum.dart';
+import 'package:snapam/util/extensions.dart';
+import 'package:snapam/util/navigate.dart';
+import 'package:snapam/util/validations.dart';
+import 'package:snapam/views/components/custom_button.dart';
+import 'package:snapam/views/components/custom_text_field.dart';
+import 'package:snapam/views/pages/tabs_screen/base_page.dart';
+
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
@@ -33,7 +34,7 @@ class _LoginState extends State<Login> {
       setState(() {});
       showInSnackBar('Please fix the errors in red before submitting.');
     } else {
-      Navigate.pushPageReplacement(context, MainScreen());
+      Navigate.pushPageReplacement(context, BasePage());
     }
   }
 
@@ -92,7 +93,7 @@ class _LoginState extends State<Login> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Text(
-          '${Constants.appName}',
+          '$appName',
           style: TextStyle(
             fontSize: 40.0,
             fontWeight: FontWeight.bold,
@@ -124,18 +125,22 @@ class _LoginState extends State<Login> {
         ).fadeInList(3, false),
         SizedBox(height: 20.0),
         buildButton(),
+        SizedBox(height: 10.0),
         Visibility(
           visible: formMode == FormMode.LOGIN,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Don\'t have an account?'),
-              FlatButton(
-                onPressed: () {
+              Text('Don\'t have an account? '),
+              InkWell(
+                onTap: () {
                   formMode = FormMode.REGISTER;
                   setState(() {});
                 },
-                child: Text('Register'),
+                child: Text(
+                  'Register',
+                  style: TextStyle(color: Theme.of(context).accentColor),
+                ),
               ),
             ],
           ),
@@ -145,13 +150,16 @@ class _LoginState extends State<Login> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Already have an account?'),
-              FlatButton(
-                onPressed: () {
+              Text('Already have an account? '),
+              InkWell(
+                onTap: () {
                   formMode = FormMode.LOGIN;
                   setState(() {});
                 },
-                child: Text('Login'),
+                child: Text(
+                  'Login',
+                  style: TextStyle(color: Theme.of(context).accentColor),
+                ),
               ),
             ],
           ),
@@ -219,11 +227,13 @@ class _LoginState extends State<Login> {
   }
 
   buildButton() {
-    return loading
-        ? Center(child: CircularProgressIndicator())
-        : CustomButton(
-            label: "Submit",
-            onPressed: () => login(),
-          ).fadeInList(4, false);
+    return Visibility(
+      visible: !loading,
+      replacement: Center(child: CircularProgressIndicator()),
+      child: CustomButton(
+        label: "Submit",
+        onPressed: () => login(),
+      ).fadeInList(4, false),
+    );
   }
 }
